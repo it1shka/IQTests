@@ -25,7 +25,7 @@ public class Drawer {
                 }
                 graphics.fillPolygon(xs, ys, 3);
             }
-        };
+        }
     }
 
     private static double getSize(int amount) {
