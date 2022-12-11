@@ -6,6 +6,24 @@ public class Tile extends JPanel {
     private int amount;
     private Color color;
 
+    public Shape.ShapeType getShapeType() {
+        return shapeType;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public boolean equalsTo(Tile other) {
+        return other.getShapeType().equals(shapeType)
+                && other.getAmount() == amount
+                && other.getColor().equals(color);
+    }
+
     public void setParameters(Shape.ShapeType shapeType, int amount, Color color) {
         this.shapeType = shapeType;
         this.amount = amount;

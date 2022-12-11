@@ -119,7 +119,9 @@ public class Controller {
     }
 
     private void optionClicked(int nth) {
-        if (nth == currentRightTile) correct++;
+        var tiles = layout.getOptionTiles();
+        if (nth == currentRightTile || tiles[nth].equalsTo(tiles[currentRightTile]))
+            correct++;
         else wrong++;
         startTheTest();
     }
