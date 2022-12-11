@@ -77,6 +77,45 @@ public class Controller {
                     getRandom(colors)
             );
         }
+
+        updateStatusLabel();
+    }
+
+    private static final String[] statuses = new String[] {
+            "very dumb",
+            "dumb",
+            "little bit stupid",
+            "not that bad",
+            "ok",
+            "fine",
+            "great",
+            "awesome",
+            "very smart",
+            "brilliant"
+    };
+
+    private static String getStatus(double percentage) {
+        var step = 100.0d / statuses.length;
+        for (var i = 0; i < statuses.length; i++) {
+            var left = i * step;
+            var right = (i + 1) * step;
+            if (percentage >= left && percentage <= right) {
+                return statuses[i];
+            }
+        }
+        return statuses[statuses.length - 1];
+    }
+
+    private void updateStatusLabel() {
+        var label = layout.getStatusLabel();
+        if (wrong == 0 && correct == 0) {
+            label.setText("0/0, let's go");
+            return;
+        }
+        var percentage = (double)correct / (double)(correct + wrong);
+        var status = getStatus(percentage * 100);
+        var labelText = String.format("%d/%d (%.2f%%) %s", correct, wrong, percentage * 100, status);
+        label.setText(labelText);
     }
 
     private void optionClicked(int nth) {
@@ -89,7 +128,8 @@ public class Controller {
         var len = parameter.length;
         var output = new ArrayList<T>(len * len);
         var initialOffset = random.nextInt(len);
-        for (var i = 0; i < 3; i++) {
+        var step = random.nextInt(len) + 1;
+        for (var i = 0; i < step * 3; i += step) {
             for (var j = 0; j < 3; j++) {
                 var index = (initialOffset + i + j) % len;
                 output.add(parameter[index]);

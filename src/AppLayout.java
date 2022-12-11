@@ -8,6 +8,7 @@ public class AppLayout {
     private JPanel optionPanel;
     private Tile[] testTiles;
     private Tile[] optionTiles;
+    private JLabel statusLabel;
 
     public Tile[] getTestTiles() {
         return testTiles;
@@ -17,13 +18,28 @@ public class AppLayout {
         return optionTiles;
     }
 
+    public JLabel getStatusLabel() {
+        return statusLabel;
+    }
+
     public AppLayout() {
         createWindow();
+        addStatusLabel();
         createTestPanel();
         attachTilesToTestPanel();
         createOptionPanel();
         attachButtonsToOptionPanel();
         packAndShowWindow();
+    }
+
+    private void addStatusLabel() {
+        var label = new JLabel("Empty label");
+        var font = new Font(Font.SANS_SERIF, Font.BOLD, 14);
+        label.setFont(font);
+        var border = new EmptyBorder(10, 10, 0, 10);
+        label.setBorder(border);
+        statusLabel = label;
+        window.add(label);
     }
 
     private void createWindow() {
